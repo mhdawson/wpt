@@ -6,15 +6,15 @@ WPT_ROOT=$SCRIPT_DIR/../..
 cd $WPT_ROOT
 
 test_infrastructure() {
-    PY3_FLAG="$2"
-    TERM=dumb ./wpt $PY3_FLAG run --log-mach - --yes --manifest ~/meta/MANIFEST.json --metadata infrastructure/metadata/ --install-fonts --install-webdriver $1 $PRODUCT infrastructure/
+    PY2_FLAG="$2"
+    TERM=dumb ./wpt $PY2_FLAG run --log-mach - --yes --manifest ~/meta/MANIFEST.json --metadata infrastructure/metadata/ --install-fonts --install-webdriver $1 $PRODUCT infrastructure/
 }
 
 main() {
-    if [[ $# -eq 1 && "$1" = "--py3" ]]; then
-        PRODUCTS=( "chrome" )
-    else
+    if [[ $# -eq 1 && "$1" = "--py2" ]]; then
         PRODUCTS=( "firefox" "chrome" )
+    else
+        PRODUCTS=( "chrome" )
     fi
     ./wpt manifest --rebuild -p ~/meta/MANIFEST.json
     for PRODUCT in "${PRODUCTS[@]}"; do
